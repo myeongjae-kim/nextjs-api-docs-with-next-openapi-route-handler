@@ -19,3 +19,5 @@ export const articleUpdateSchema = articleCreationSchema
   .describe("Object to update an article");
 
 export type ArticleUpdate = z.infer<typeof articleUpdateSchema>;
+
+export const articleListSchema = z.object({ content: articleSchema.array() });
