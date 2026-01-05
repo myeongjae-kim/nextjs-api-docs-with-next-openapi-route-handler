@@ -13,7 +13,7 @@ const globalErrorHandler = <T>(action: Action<T>): ReturnType<ActionMiddleware<T
         return Response.json(new ApiError({
           status: defaultServerErrorStatus,
           error: "RESPONSE_VALIDATION_ERROR",
-          code: "SERVER-001",
+          code: "CODE_001",
           message: e.issues?.[0]?.message,
         }), { status: defaultServerErrorStatus });
       }
@@ -21,7 +21,7 @@ const globalErrorHandler = <T>(action: Action<T>): ReturnType<ActionMiddleware<T
       return Response.json(new ApiError({
         status: defaultServerErrorStatus,
         error: "INTERNAL_SERVER_ERROR",
-        code: "SERVER-000",
+        code: "NONE",
         message: (e as Error).message,
       }), { status: defaultServerErrorStatus });
     }
