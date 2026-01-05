@@ -51,6 +51,7 @@ export const { PUT } = defineRoute({
   summary: "Update an Article by ID",
   description: "Update an Article by ID",
   tags: ["Articles"],
+  security: [{ bearerAuth: [] }], // requied bearer auth
   pathParams: z.object({
     id: z.string().describe("ID of the article"),
   }),
@@ -68,6 +69,7 @@ export const { DELETE } = defineRoute({
   summary: "Delete an Article by ID",
   description: "Delete an Article by ID",
   tags: ["Articles"],
+  security: [{ bearerAuth: [] }], // requied bearer auth
   pathParams: z.object({
     id: z.string().describe("ID of the article"),
   }),

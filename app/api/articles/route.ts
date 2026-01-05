@@ -36,6 +36,7 @@ export const { POST } = defineRoute({
   summary: "Create an Article",
   description: "Create an Article",
   tags: ["Articles"],
+  security: [{ bearerAuth: [] }], // requied bearer auth
   action: async () => {
     return Response.json({
       id: 1

@@ -14,6 +14,13 @@ export const GET = async () => {
       title: "Next.js API Docs with next-openapi-route-handler",
       version: "1.0.0",
     },
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        description: 'Token Description',
+      },
+    },
   });
 
   return Response.json(spec);
