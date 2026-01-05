@@ -8,8 +8,8 @@
     "start": "next start",
     "_start": "next start -p 3031",
     "lint": "eslint",
-    "test": "vitest --exclude '**/*.int.test.*'",
-    "_intTest": "vitest run int.test",
+    "test": "vitest --exclude '**/*.int.test.*' --reporter tree",
+    "_intTest": "vitest run int.test --reporter tree",
     "intTest": "npm run build && start-server-and-test _start http://localhost:3031 _intTest"
   },
   "dependencies": {

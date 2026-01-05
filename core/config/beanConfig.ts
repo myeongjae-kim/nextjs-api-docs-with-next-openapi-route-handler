@@ -17,6 +17,7 @@ export type Beans = {
   CreateArticleUseCase: CreateArticleUseCase,
   UpdateArticleUseCase: UpdateArticleUseCase,
   DeleteArticleUseCase: DeleteArticleUseCase,
+
   GetArticleByIdUseCase: GetArticleByIdUseCase,
   FindAllArticlesUseCase: FindAllArticlesUseCase,
 }
