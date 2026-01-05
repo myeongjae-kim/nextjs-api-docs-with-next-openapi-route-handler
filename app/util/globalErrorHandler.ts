@@ -1,9 +1,8 @@
 import z from "zod";
 import { ApiError } from "../domain/ApiError";
+import { Action, ActionMiddleware } from "./@omer-x/next-openapi-route-handler/returnDefineRoute";
 
-const globalErrorHandler = <T>(
-  action: (source: T, request: Request) => Response | Promise<Response>
-): (source: T, request: Request) => Promise<Response> => {
+const globalErrorHandler = <T>(action: Action<T>): ReturnType<ActionMiddleware<T>> => {
   return async (source, request) => {
     try {
       return await action(source, request);
