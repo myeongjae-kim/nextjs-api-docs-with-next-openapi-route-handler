@@ -12,14 +12,14 @@ describe("GET /api/articles/[id]", () => {
     });
   });
 
-  it("should return 500 when id is 999", async () => {
+  it("should return 404 when id is 999", async () => {
     const response = await fetch(`${testEnv.TEST_HOST}/api/articles/999`);
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(404);
     await expect(response.json()).resolves.toMatchObject({
-      "code": "NONE",
-      "error": "INTERNAL_SERVER_ERROR",
+      "code": "CODE_002",
+      "error": "DOMAIN_NOT_FOUND_ERROR",
       "message": "Article #999 not found",
-      "status": 500,
+      "status": 404,
       "timestamp": expect.any(String),
     });
   });
@@ -29,8 +29,21 @@ describe("PUT /api/articles/[id]", () => {
   it("should return 200", async () => {
     const response = await fetch(`${testEnv.TEST_HOST}/api/articles/1`, {
       method: "PUT",
+      headers: {
+        Authorization: "Bearer default-token-value-for-docs",
+      },
     });
     expect(response.status).toBe(200);
+  });
+
+  it("should return 401 when invalid token", async () => {
+    const response = await fetch(`${testEnv.TEST_HOST}/api/articles/1`, {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer invalid-token-value",
+      },
+    });
+    expect(response.status).toBe(401);
   });
 });
 
@@ -38,7 +51,20 @@ describe("DELETE /api/articles/[id]", () => {
   it("should return 200", async () => {
     const response = await fetch(`${testEnv.TEST_HOST}/api/articles/1`, {
       method: "DELETE",
+      headers: {
+        Authorization: "Bearer default-token-value-for-docs",
+      },
     });
     expect(response.status).toBe(200);
+  });
+
+  it("should return 401 when invalid token", async () => {
+    const response = await fetch(`${testEnv.TEST_HOST}/api/articles/1`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer invalid-token-value",
+      },
+    });
+    expect(response.status).toBe(401);
   });
 });

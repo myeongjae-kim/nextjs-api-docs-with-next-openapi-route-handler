@@ -31,10 +31,23 @@ describe("POST /api/articles", () => {
   it("should return 200", async () => {
     const response = await fetch(`${testEnv.TEST_HOST}/api/articles`, {
       method: "POST",
+      headers: {
+        Authorization: "Bearer default-token-value-for-docs",
+      },
     });
     expect(response.status).toBe(200);
     await expect(response.json()).resolves.toMatchObject({
       id: 1,
     });
+  });
+
+  it("should return 401 when invalid token", async () => {
+    const response = await fetch(`${testEnv.TEST_HOST}/api/articles`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer invalid-token-value",
+      },
+    });
+    expect(response.status).toBe(401);
   });
 });

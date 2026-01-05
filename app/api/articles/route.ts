@@ -1,3 +1,4 @@
+import { apiErrorSchema } from "@/app/domain/ApiError";
 import { articleCreationSchema, articleListSchema } from "@/app/domain/Article";
 import defineRoute from "@/app/util/@omer-x/next-openapi-route-handler";
 
@@ -44,5 +45,6 @@ export const { POST } = defineRoute({
   },
   responses: {
     200: { description: "Article Created", content: articleCreationSchema },
+    401: { description: "Unauthorized", content: apiErrorSchema },
   },
 })

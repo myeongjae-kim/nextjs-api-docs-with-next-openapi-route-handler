@@ -63,6 +63,7 @@ export const { PUT } = defineRoute({
   },
   responses: {
     200: { description: "Article Updated", content: articleUpdateSchema },
+    401: { description: "Unauthorized", content: apiErrorSchema },
   },
 })
 
@@ -80,6 +81,7 @@ export const { DELETE } = defineRoute({
     return new Response(null, { status: 200 });
   },
   responses: {
-    200: { description: "Article Deleted" }
+    200: { description: "Article Deleted" },
+    401: { description: "Unauthorized", content: apiErrorSchema },
   },
 })
