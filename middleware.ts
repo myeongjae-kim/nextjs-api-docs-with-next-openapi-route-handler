@@ -1,19 +1,16 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import { isApiAuthRequired } from './app/api/securityConfig';
 import { ApiError } from './app/domain/ApiError';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const { method } = request;
 
-  const isArticlesPath = pathname === '/api/articles';
-  const isArticleIdPath = pathname.startsWith('/api/articles/') && pathname.split('/').length === 4;
-
-  const requiresAuth = (isArticlesPath && method === 'POST') ||
-    (isArticleIdPath && (method === 'PUT' || method === 'DELETE'));
-
-  if (requiresAuth) {
+  if (isApiAuthRequired(method, pathname)) {
     const authHeader = request.headers.get('Authorization');
+
+    // here is the place of complex auth logic
     const expectedToken = 'Bearer default-token-value-for-docs';
 
     if (authHeader !== expectedToken) {
@@ -31,7 +28,3 @@ export function middleware(request: NextRequest) {
 
   return NextResponse.next();
 }
-
-export const config = {
-  matcher: '/api/articles/:path*',
-};

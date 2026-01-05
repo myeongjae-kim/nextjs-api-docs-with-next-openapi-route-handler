@@ -17,6 +17,7 @@
         url: "/api/swagger",
         defaultOpenAllTags: true,
         authentication: {
+            preferredSecurityScheme: 'bearerAuth',
             securitySchemes: {
                 bearerAuth: {
                     token: 'default-token-value-for-docs',
