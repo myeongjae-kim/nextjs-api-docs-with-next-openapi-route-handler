@@ -24,3 +24,21 @@ describe("GET /api/articles/[id]", () => {
     });
   });
 });
+
+describe("PUT /api/articles/[id]", () => {
+  it("should return 200", async () => {
+    const response = await fetch(`${testEnv.TEST_HOST}/api/articles/1`, {
+      method: "PUT",
+    });
+    expect(response.status).toBe(200);
+  });
+});
+
+describe("DELETE /api/articles/[id]", () => {
+  it("should return 200", async () => {
+    const response = await fetch(`${testEnv.TEST_HOST}/api/articles/1`, {
+      method: "DELETE",
+    });
+    expect(response.status).toBe(200);
+  });
+});
